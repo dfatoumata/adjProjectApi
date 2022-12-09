@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { PersonnelsService } from './personnels.service';
 import { CreatePersonnelDto } from './dto/create-personnel.dto';
 import { UpdatePersonnelDto } from './dto/update-personnel.dto';
@@ -8,28 +8,50 @@ export class PersonnelsController {
   constructor(private readonly personnelsService: PersonnelsService) {}
 
   @Post()
-  @HttpCode(204)
   create(@Body() createPersonnelDto: CreatePersonnelDto) {
-    return this.personnelsService.create(createPersonnelDto);
+    const personnel = this.personnelsService.create(createPersonnelDto);
+    return {
+      statutCode: HttpStatus.OK,
+      message: "Personnel creeer avec succes",
+      personnel: personnel
+    }
   }
 
   @Get()
   findAll() {
-    return this.personnelsService.findAll();
+    const personnels = this.personnelsService.findAll();
+    return {
+      statusCode: HttpStatus.OK,
+      message: "Liste des personnel recuperer avec succes",
+      personnels
+    }
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.personnelsService.findOne(+id);
+    const personnel = this.personnelsService.findOne(+id);
+    return {
+      statusode: HttpStatus.OK,
+      message: "Personnel retrouver avec succes",
+      personnel
+    }
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePersonnelDto: UpdatePersonnelDto) {
-    return this.personnelsService.update(+id, updatePersonnelDto);
+    this.personnelsService.update(+id, updatePersonnelDto);
+    return {
+      statusCode: HttpStatus.OK,
+      message: "personnel modifier avec succes"
+    }
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.personnelsService.remove(+id);
+    this.personnelsService.remove(+id);
+    return {
+      statusCode: HttpStatus.OK,
+      message: "personnel supprimer avec succes"
+    }
   }
 }

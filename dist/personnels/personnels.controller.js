@@ -22,24 +22,46 @@ let PersonnelsController = class PersonnelsController {
         this.personnelsService = personnelsService;
     }
     create(createPersonnelDto) {
-        return this.personnelsService.create(createPersonnelDto);
+        const personnel = this.personnelsService.create(createPersonnelDto);
+        return {
+            statutCode: common_1.HttpStatus.OK,
+            message: "Personnel creeer avec succes",
+            personnel: personnel
+        };
     }
     findAll() {
-        return this.personnelsService.findAll();
+        const personnels = this.personnelsService.findAll();
+        return {
+            statusCode: common_1.HttpStatus.OK,
+            message: "Liste des personnel recuperer avec succes",
+            personnels
+        };
     }
     findOne(id) {
-        return this.personnelsService.findOne(+id);
+        const personnel = this.personnelsService.findOne(+id);
+        return {
+            statusode: common_1.HttpStatus.OK,
+            message: "Personnel retrouver avec succes",
+            personnel
+        };
     }
     update(id, updatePersonnelDto) {
-        return this.personnelsService.update(+id, updatePersonnelDto);
+        this.personnelsService.update(+id, updatePersonnelDto);
+        return {
+            statusCode: common_1.HttpStatus.OK,
+            message: "personnel modifier avec succes"
+        };
     }
     remove(id) {
-        return this.personnelsService.remove(+id);
+        this.personnelsService.remove(+id);
+        return {
+            statusCode: common_1.HttpStatus.OK,
+            message: "personnel supprimer avec succes"
+        };
     }
 };
 __decorate([
     (0, common_1.Post)(),
-    (0, common_1.HttpCode)(204),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_personnel_dto_1.CreatePersonnelDto]),
