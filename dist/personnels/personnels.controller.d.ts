@@ -4,9 +4,11 @@ import { UpdatePersonnelDto } from './dto/update-personnel.dto';
 export declare class PersonnelsController {
     private readonly personnelsService;
     constructor(personnelsService: PersonnelsService);
-    create(createPersonnelDto: CreatePersonnelDto): string;
-    findAll(): string;
-    findOne(id: string): string;
-    update(id: string, updatePersonnelDto: UpdatePersonnelDto): string;
-    remove(id: string): string;
+    create(createPersonnelDto: CreatePersonnelDto): Promise<CreatePersonnelDto & import("./entities/personnel.entity").Personnel>;
+    findAll(): Promise<import("./entities/personnel.entity").Personnel[]>;
+    findOne(id: string): Promise<import("./entities/personnel.entity").Personnel>;
+    update(id: string, updatePersonnelDto: UpdatePersonnelDto): Promise<import("./entities/personnel.entity").Personnel>;
+    remove(id: string): {
+        deleted: boolean;
+    };
 }

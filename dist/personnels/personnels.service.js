@@ -5,28 +5,47 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PersonnelsService = void 0;
 const common_1 = require("@nestjs/common");
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
+const personnel_entity_1 = require("./entities/personnel.entity");
 let PersonnelsService = class PersonnelsService {
+    constructor(personnelRepository) {
+        this.personnelRepository = personnelRepository;
+    }
     create(createPersonnelDto) {
-        return 'This action adds a new personnel';
+        const personnel = this.personnelRepository.save(createPersonnelDto);
+        return personnel;
     }
     findAll() {
-        return `This action returns all personnels`;
+        return this.personnelRepository.find();
     }
     findOne(id) {
-        return `This action returns a #${id} personnel`;
+        return this.personnelRepository.findOne({
+            where: { id: id }
+        });
     }
     update(id, updatePersonnelDto) {
-        return `This action updates a #${id} personnel`;
+        this.personnelRepository.update({ id }, updatePersonnelDto);
+        return this.personnelRepository.findOne({ where: { id: id } });
     }
     remove(id) {
-        return `This action removes a #${id} personnel`;
+        this.personnelRepository.delete({ id });
+        return { deleted: true };
     }
 };
 PersonnelsService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __param(0, (0, typeorm_1.InjectRepository)(personnel_entity_1.Personnel)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], PersonnelsService);
 exports.PersonnelsService = PersonnelsService;
 //# sourceMappingURL=personnels.service.js.map

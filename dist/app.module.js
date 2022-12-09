@@ -11,11 +11,25 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const personnels_module_1 = require("./personnels/personnels.module");
+const typeorm_1 = require("@nestjs/typeorm");
+const personnel_entity_1 = require("./personnels/entities/personnel.entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [personnels_module_1.PersonnelsModule],
+        imports: [
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'mysql',
+                host: 'localhost',
+                port: 8889,
+                username: 'root',
+                password: 'root',
+                database: 'nesttest',
+                entities: [personnel_entity_1.Personnel],
+                synchronize: true,
+                dropSchema: true
+            }), personnels_module_1.PersonnelsModule
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

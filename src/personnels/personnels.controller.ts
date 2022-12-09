@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@nestjs/common';
 import { PersonnelsService } from './personnels.service';
 import { CreatePersonnelDto } from './dto/create-personnel.dto';
 import { UpdatePersonnelDto } from './dto/update-personnel.dto';
@@ -8,6 +8,7 @@ export class PersonnelsController {
   constructor(private readonly personnelsService: PersonnelsService) {}
 
   @Post()
+  @HttpCode(204)
   create(@Body() createPersonnelDto: CreatePersonnelDto) {
     return this.personnelsService.create(createPersonnelDto);
   }
