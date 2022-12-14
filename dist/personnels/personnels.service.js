@@ -22,8 +22,7 @@ let PersonnelsService = class PersonnelsService {
         this.personnelRepository = personnelRepository;
     }
     create(createPersonnelDto) {
-        const personnel = this.personnelRepository.save(createPersonnelDto);
-        return personnel;
+        return this.personnelRepository.save(createPersonnelDto);
     }
     findAll() {
         return this.personnelRepository.find();

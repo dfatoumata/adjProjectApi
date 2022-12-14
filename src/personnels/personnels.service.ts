@@ -12,8 +12,8 @@ export class PersonnelsService {
     private personnelRepository: Repository<Personnel>){}
 
   create(createPersonnelDto: CreatePersonnelDto) {
-     const personnel =this.personnelRepository.save(createPersonnelDto);
-     return personnel;
+     return this.personnelRepository.save(createPersonnelDto);
+     
   }
 
   findAll() {

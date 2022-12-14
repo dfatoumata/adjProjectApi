@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { PersonnelsService } from './personnels.service';
 import { CreatePersonnelDto } from './dto/create-personnel.dto';
 import { UpdatePersonnelDto } from './dto/update-personnel.dto';
@@ -9,49 +9,30 @@ export class PersonnelsController {
 
   @Post()
   create(@Body() createPersonnelDto: CreatePersonnelDto) {
-    const personnel = this.personnelsService.create(createPersonnelDto);
-    return {
-      statutCode: HttpStatus.OK,
-      message: "Personnel creeer avec succes",
-      personnel: personnel
-    }
+    return this.personnelsService.create(createPersonnelDto);
+    
   }
 
   @Get()
   findAll() {
-    const personnels = this.personnelsService.findAll();
-    return {
-      statusCode: HttpStatus.OK,
-      message: "Liste des personnel recuperer avec succes",
-      personnels
-    }
+    return this.personnelsService.findAll();
+    
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    const personnel = this.personnelsService.findOne(+id);
-    return {
-      statusode: HttpStatus.OK,
-      message: "Personnel retrouver avec succes",
-      personnel
-    }
+    return this.personnelsService.findOne(+id);
+    
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updatePersonnelDto: UpdatePersonnelDto) {
     this.personnelsService.update(+id, updatePersonnelDto);
-    return {
-      statusCode: HttpStatus.OK,
-      message: "personnel modifier avec succes"
-    }
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
     this.personnelsService.remove(+id);
-    return {
-      statusCode: HttpStatus.OK,
-      message: "personnel supprimer avec succes"
-    }
+    return "le personnel est supprimee avec succes"
   }
 }

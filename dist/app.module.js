@@ -13,6 +13,8 @@ const app_service_1 = require("./app.service");
 const personnels_module_1 = require("./personnels/personnels.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const personnel_entity_1 = require("./personnels/entities/personnel.entity");
+const fichiers_module_1 = require("./fichiers/fichiers.module");
+const fichier_entity_1 = require("./fichiers/entities/fichier.entity");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -25,10 +27,9 @@ AppModule = __decorate([
                 username: 'root',
                 password: 'root',
                 database: 'nesttest',
-                entities: [personnel_entity_1.Personnel],
+                entities: [personnel_entity_1.Personnel, fichier_entity_1.Fichier],
                 synchronize: true,
-                dropSchema: true
-            }), personnels_module_1.PersonnelsModule
+            }), personnels_module_1.PersonnelsModule, fichiers_module_1.FichiersModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
