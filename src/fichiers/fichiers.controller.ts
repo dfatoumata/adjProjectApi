@@ -1,22 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FichiersService } from './fichiers.service';
-import { CreateFichierDto } from './dto/create-fichier.dto';
+// import { CreateFichierDto } from './dto/create-fichier.dto';
 import { UpdateFichierDto } from './dto/update-fichier.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { readFileSync } from 'fs';
 
 @Controller('fichiers')
 export class FichiersController {
   constructor(private readonly fichiersService: FichiersService) {}
 
   @Post()
-  @UseInterceptors(FileInterceptor('fichier', {
-    storage: diskStorage({
-      destination: './fichiers',
-    })
-  } ))
-  create(@Body() createFichierDto: CreateFichierDto) {
-    return this.fichiersService.create(createFichierDto);
+  @UseInterceptors(FileInterceptor('file'))
+  create(@UploadedFile() file: Express.Multer.File ) {
+    console.log(file)
   }
 
   @Get()

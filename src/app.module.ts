@@ -6,10 +6,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Personnel } from './personnels/entities/personnel.entity';
 import { FichiersModule } from './fichiers/fichiers.module';
 import { Fichier } from './fichiers/entities/fichier.entity';
+import { MulterModule } from '@nestjs/platform-express';
+
 
 
 @Module({
   imports: [
+    MulterModule.register({
+      dest: './files',
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',

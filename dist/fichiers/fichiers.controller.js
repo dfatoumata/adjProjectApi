@@ -15,16 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FichiersController = void 0;
 const common_1 = require("@nestjs/common");
 const fichiers_service_1 = require("./fichiers.service");
-const create_fichier_dto_1 = require("./dto/create-fichier.dto");
 const update_fichier_dto_1 = require("./dto/update-fichier.dto");
 const platform_express_1 = require("@nestjs/platform-express");
-const multer_1 = require("multer");
 let FichiersController = class FichiersController {
     constructor(fichiersService) {
         this.fichiersService = fichiersService;
     }
-    create(createFichierDto) {
-        return this.fichiersService.create(createFichierDto);
+    create(file) {
+        console.log(file);
     }
     findAll() {
         return this.fichiersService.findAll();
@@ -41,14 +39,10 @@ let FichiersController = class FichiersController {
 };
 __decorate([
     (0, common_1.Post)(),
-    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('fichier', {
-        storage: (0, multer_1.diskStorage)({
-            destination: './fichiers',
-        })
-    })),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_fichier_dto_1.CreateFichierDto]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], FichiersController.prototype, "create", null);
 __decorate([

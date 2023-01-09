@@ -15,11 +15,15 @@ const typeorm_1 = require("@nestjs/typeorm");
 const personnel_entity_1 = require("./personnels/entities/personnel.entity");
 const fichiers_module_1 = require("./fichiers/fichiers.module");
 const fichier_entity_1 = require("./fichiers/entities/fichier.entity");
+const platform_express_1 = require("@nestjs/platform-express");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            platform_express_1.MulterModule.register({
+                dest: './files',
+            }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',
                 host: 'localhost',

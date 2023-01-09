@@ -7,7 +7,7 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     const config = new swagger_1.DocumentBuilder()
         .setTitle('P@pusko CRUD Swagger')
-        .setDescription('The first test API description')
+        .setDescription('My fist API Nestjs test API description')
         .setVersion('1.0')
         .addTag('CRUD')
         .build();
